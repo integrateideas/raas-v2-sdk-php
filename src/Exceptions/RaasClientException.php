@@ -18,7 +18,7 @@ class RaasClientException extends APIException
     /**
      * Request timestamp
      * @required
-     * @var DateTime $timestamp public property
+     * @var \DateTime $timestamp public property
      */
     public $timestamp;
 
