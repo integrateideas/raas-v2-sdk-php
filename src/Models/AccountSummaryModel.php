@@ -32,7 +32,7 @@ class AccountSummaryModel implements JsonSerializable
     /**
      * Date Created
      * @required
-     * @factory \Raas\Utils\DateTimeHelper::fromRfc3339DateTime
+     * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $createdAt public property
      */
     public $createdAt;

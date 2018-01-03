@@ -32,7 +32,7 @@ class DepositResponseModel implements JsonSerializable
     /**
      * @todo Write general description for this property
      * @required
-     * @factory \Raas\Utils\DateTimeHelper::fromRfc3339DateTime
+     * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $createdDate public property
      */
     public $createdDate;

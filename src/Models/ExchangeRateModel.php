@@ -18,7 +18,7 @@ class ExchangeRateModel implements JsonSerializable
     /**
      * Last Modified
      * @required
-     * @factory \Raas\Utils\DateTimeHelper::fromRfc3339DateTime
+     * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $lastModifiedDate public property
      */
     public $lastModifiedDate;

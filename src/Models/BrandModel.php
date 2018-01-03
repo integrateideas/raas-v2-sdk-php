@@ -60,7 +60,7 @@ class BrandModel implements JsonSerializable
     /**
      * Date Created
      * @required
-     * @factory \Raas\Utils\DateTimeHelper::fromRfc3339DateTime
+     * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $createdDate public property
      */
     public $createdDate;
@@ -68,7 +68,7 @@ class BrandModel implements JsonSerializable
     /**
      * Last Updated
      * @required
-     * @factory \Raas\Utils\DateTimeHelper::fromRfc3339DateTime
+     * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $lastUpdateDate public property
      */
     public $lastUpdateDate;
