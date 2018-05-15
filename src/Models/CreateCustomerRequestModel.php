@@ -10,19 +10,19 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Create Customer Request
+ *Represents the request to create a customer
  */
 class CreateCustomerRequestModel implements JsonSerializable
 {
     /**
-     * Customer Identifier
+     * The customer identifier
      * @required
      * @var string $customerIdentifier public property
      */
     public $customerIdentifier;
 
     /**
-     * Display Name
+     * The display name
      * @required
      * @var string $displayName public property
      */

@@ -20,13 +20,13 @@ class Configuration
     public static $environment = Environments::SANDBOX;
 
     /**
-     * RaaS v2 API Platform Name
+     * Platform Name (Provided by Tango Card)
      * @var string
      */
     public static $platformName = 'QAPlatform2';
 
     /**
-     * RaaS v2 API Platform Key
+     * Platform Key (Provided by Tango Card)
      * @var string
      */
     public static $platformKey = 'apYPfT6HNONpDRUj3CLGWYt7gvIHONpDRUYPfT6Hj';
@@ -55,15 +55,6 @@ class Configuration
         ),
         Environments::PRODUCTION => array(
             Servers::DEFAULT_ => 'https://api.tangocard.com/raas/v2',
-        ),
-        Environments::QA => array(
-            Servers::DEFAULT_ => 'https://qa-api.tangocard.com/raas/v2',
-        ),
-        Environments::GAMMA => array(
-            Servers::DEFAULT_ => 'https://gamma-api.tangocard.com/raas/v2',
-        ),
-        Environments::LOCAL => array(
-            Servers::DEFAULT_ => 'http://raastango.cc:8080/v2',
         ),
     );
 }

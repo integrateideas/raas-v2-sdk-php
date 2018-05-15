@@ -10,33 +10,33 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Model for pagination information
+ *Represents the pagination information returned in a paginated API call
  */
 class PageModel implements JsonSerializable
 {
     /**
-     * Page Number
+     * The page number
      * @required
      * @var integer $number public property
      */
     public $number;
 
     /**
-     * Elements per page
+     * The number of elements per page
      * @required
      * @var integer $elementsPerBlock public property
      */
     public $elementsPerBlock;
 
     /**
-     * Result Count
+     * The number of results returned
      * @required
      * @var integer $resultCount public property
      */
     public $resultCount;
 
     /**
-     * Total Count
+     * The total number of results
      * @required
      * @var integer $totalCount public property
      */

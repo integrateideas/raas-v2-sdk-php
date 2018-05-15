@@ -10,19 +10,19 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * RaaS 5xx Error
+ *Represents a RaaS 5xx Error
  */
 class RaasServerErrorModel implements JsonSerializable
 {
     /**
-     * Error Message
+     * The error message
      * @required
      * @var string $message public property
      */
     public $message;
 
     /**
-     * Error Code
+     * The RaaS error code
      * @required
      * @var integer $code public property
      */

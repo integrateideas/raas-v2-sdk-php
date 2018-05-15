@@ -11,54 +11,54 @@ use JsonSerializable;
 use RaasLib\Utils\DateTimeHelper;
 
 /**
- * Brand Model
+ *Represents a Brand
  */
 class BrandModel implements JsonSerializable
 {
     /**
-     * Brand Key
+     * The brand key
      * @required
      * @var string $brandKey public property
      */
     public $brandKey;
 
     /**
-     * Brand Name
+     * The brand name
      * @required
      * @var string $brandName public property
      */
     public $brandName;
 
     /**
-     * Disclaimer
+     * The brand's disclaimer
      * @required
      * @var string $disclaimer public property
      */
     public $disclaimer;
 
     /**
-     * Description
+     * The brand's description
      * @required
      * @var string $description public property
      */
     public $description;
 
     /**
-     * Short Description
+     * The brand's short description
      * @required
      * @var string $shortDescription public property
      */
     public $shortDescription;
 
     /**
-     * Terms
+     * The brand's terms
      * @required
      * @var string $terms public property
      */
     public $terms;
 
     /**
-     * Date Created
+     * The date the brand was created
      * @required
      * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $createdDate public property
@@ -66,7 +66,7 @@ class BrandModel implements JsonSerializable
     public $createdDate;
 
     /**
-     * Last Updated
+     * The date the brand was last updated
      * @required
      * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $lastUpdateDate public property
@@ -74,21 +74,21 @@ class BrandModel implements JsonSerializable
     public $lastUpdateDate;
 
     /**
-     * Image URLs
+     * A map of Image URLs
      * @required
      * @var array $imageUrls public property
      */
     public $imageUrls;
 
     /**
-     * Status
+     * The brand's status
      * @required
      * @var string $status public property
      */
     public $status;
 
     /**
-     * Items
+     * An array of Item objects
      * @required
      * @var \RaasLib\Models\ItemModel[] $items public property
      */

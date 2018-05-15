@@ -11,33 +11,33 @@ use JsonSerializable;
 use RaasLib\Utils\DateTimeHelper;
 
 /**
- * Customer Model
+ *Represents a Customer/Group
  */
 class CustomerModel implements JsonSerializable
 {
     /**
-     * Customer Identifier
+     * The customer identifier
      * @required
      * @var string $customerIdentifier public property
      */
     public $customerIdentifier;
 
     /**
-     * Display Name
+     * The display name
      * @required
      * @var string $displayName public property
      */
     public $displayName;
 
     /**
-     * Status
+     * The status of the customer
      * @required
      * @var string $status public property
      */
     public $status;
 
     /**
-     * Date Created
+     * The date the customer was created
      * @required
      * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $createdAt public property
@@ -45,9 +45,8 @@ class CustomerModel implements JsonSerializable
     public $createdAt;
 
     /**
-     * Accounts
-     * @required
-     * @var \RaasLib\Models\AccountSummaryModel[] $accounts public property
+     * An array of AccountSummary objects
+     * @var \RaasLib\Models\AccountSummaryModel[]|null $accounts public property
      */
     public $accounts;
 

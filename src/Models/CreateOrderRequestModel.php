@@ -10,86 +10,92 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Create Order Request
+ *Represents the request to place an order
  */
 class CreateOrderRequestModel implements JsonSerializable
 {
     /**
-     * Account Identifier
+     * The account identifier
      * @required
      * @var string $accountIdentifier public property
      */
     public $accountIdentifier;
 
     /**
-     * Amount
+     * The order amount
      * @required
      * @var double $amount public property
      */
     public $amount;
 
     /**
-     * Customer Identifier
+     * The customer identifier
      * @required
      * @var string $customerIdentifier public property
      */
     public $customerIdentifier;
 
     /**
-     * Send Email
+     * Indicates whether we should deliver this reward via email
      * @required
      * @var bool $sendEmail public property
      */
     public $sendEmail;
 
     /**
-     * UTID
+     * The UTID
      * @required
      * @var string $utid public property
      */
     public $utid;
 
     /**
-     * Campaign
+     * An optional campaign identifier
      * @var string|null $campaign public property
      */
     public $campaign;
 
     /**
-     * Email Subject
+     * The subject of the gift email
      * @var string|null $emailSubject public property
      */
     public $emailSubject;
 
     /**
-     * External Reference ID
+     * An optional external reference id
      * @var string|null $externalRefID public property
      */
     public $externalRefID;
 
     /**
-     * Email Message
+     * The gift message in the email
      * @var string|null $message public property
      */
     public $message;
 
     /**
-     * Recipient
+     * The recipient's information
      * @var \RaasLib\Models\NameEmailModel|null $recipient public property
      */
     public $recipient;
 
     /**
-     * Sender
+     * Optional sender information
      * @var \RaasLib\Models\NameEmailModel|null $sender public property
      */
     public $sender;
 
     /**
-     * Notes
+     * Optional notes (not displayed to customer)
      * @var string|null $notes public property
      */
     public $notes;
+
+    /**
+     * The email template identifier
+     * @var string|null $etid public property
+     */
+    public $etid;
 
     /**
      * Constructor to set initial or default values of member properties
@@ -105,10 +111,11 @@ class CreateOrderRequestModel implements JsonSerializable
      * @param NameEmailModel $recipient          Initialization value for $this->recipient
      * @param NameEmailModel $sender             Initialization value for $this->sender
      * @param string         $notes              Initialization value for $this->notes
+     * @param string         $etid               Initialization value for $this->etid
      */
     public function __construct()
     {
-        if (12 == func_num_args()) {
+        if (13 == func_num_args()) {
             $this->accountIdentifier  = func_get_arg(0);
             $this->amount             = func_get_arg(1);
             $this->customerIdentifier = func_get_arg(2);
@@ -121,6 +128,7 @@ class CreateOrderRequestModel implements JsonSerializable
             $this->recipient          = func_get_arg(9);
             $this->sender             = func_get_arg(10);
             $this->notes              = func_get_arg(11);
+            $this->etid               = func_get_arg(12);
         }
     }
 
@@ -143,6 +151,7 @@ class CreateOrderRequestModel implements JsonSerializable
         $json['recipient']          = $this->recipient;
         $json['sender']             = $this->sender;
         $json['notes']              = $this->notes;
+        $json['etid']               = $this->etid;
 
         return $json;
     }

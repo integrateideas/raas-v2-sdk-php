@@ -11,7 +11,7 @@ use JsonSerializable;
 use RaasLib\Utils\DateTimeHelper;
 
 /**
- * Response for Resend Order Call
+ *Represents the response returned from a resend order request
  */
 class ResendOrderResponseModel implements JsonSerializable
 {

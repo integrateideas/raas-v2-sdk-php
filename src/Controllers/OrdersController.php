@@ -44,67 +44,7 @@ class OrdersController extends BaseController
     }
 
     /**
-     * @todo Add general description for this endpoint
-     *
-     * @param Models\CreateOrderRequestModel $body TODO: type description here
-     * @return mixed response from the API call
-     * @throws APIException Thrown if API call fails
-     */
-    public function createOrder(
-        $body
-    ) {
-        //check that all required arguments are provided
-        if (!isset($body)) {
-            throw new \InvalidArgumentException("One or more required arguments were NULL.");
-        }
-
-
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
-        //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/orders';
-
-        //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
-
-        //prepare headers
-        $_headers = array (
-            'user-agent'    => 'TangoCardv2NGSDK',
-            'Accept'        => 'application/json',
-            'content-type'  => 'application/json; charset=utf-8'
-        );
-
-        //set HTTP basic auth parameters
-        Request::auth(Configuration::$platformName, Configuration::$platformKey);
-
-        //call on-before Http callback
-        $_httpRequest = new HttpRequest(HttpMethod::POST, $_headers, $_queryUrl);
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
-        }
-
-        //and invoke the API call request to fetch the response
-        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($body));
-
-        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
-        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
-
-        //call on-after Http callback
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
-        }
-
-        //handle errors defined at the API level
-        $this->validateResponse($_httpResponse, $_httpContext);
-
-        $mapper = $this->getJsonMapper();
-
-        return $mapper->mapClass($response->body, 'RaasLib\\Models\\OrderModel');
-    }
-
-    /**
-     * @todo Add general description for this endpoint
+     * Retrieves a single order
      *
      * @param string $referenceOrderID Reference Order ID
      * @return mixed response from the API call
@@ -135,7 +75,7 @@ class OrdersController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'     => 'TangoCardv2NGSDK',
+            'user-agent'     => 'V2NGSDK',
             'Accept'         => 'application/json'
         );
 
@@ -159,6 +99,11 @@ class OrdersController extends BaseController
             $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
         }
 
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
+        }
+
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
 
@@ -168,16 +113,85 @@ class OrdersController extends BaseController
     }
 
     /**
-     * @todo Add general description for this endpoint
+     * Resends an order
+     *
+     * @param string $referenceOrderID The order's reference order id
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function createResendOrder(
+        $referenceOrderID
+    ) {
+        //check that all required arguments are provided
+        if (!isset($referenceOrderID)) {
+            throw new \InvalidArgumentException("One or more required arguments were NULL.");
+        }
+
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::getBaseUri();
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/orders/{referenceOrderID}/resends';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'referenceOrderID' => $referenceOrderID,
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'     => 'V2NGSDK',
+            'Accept'         => 'application/json'
+        );
+
+        //set HTTP basic auth parameters
+        Request::auth(Configuration::$platformName, Configuration::$platformKey);
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::POST, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::post($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        $mapper = $this->getJsonMapper();
+
+        return $mapper->mapClass($response->body, 'RaasLib\\Models\\ResendOrderResponseModel');
+    }
+
+    /**
+     * Retrieves a list of orders under a platform
      *
      * @param  array  $options    Array with all options for search
-     * @param string   $options['accountIdentifier']  (optional) TODO: type description here
-     * @param string   $options['customerIdentifier'] (optional) TODO: type description here
-     * @param string   $options['externalRefID']      (optional) TODO: type description here
-     * @param DateTime $options['startDate']          (optional) TODO: type description here
-     * @param DateTime $options['endDate']            (optional) TODO: type description here
-     * @param integer  $options['elementsPerBlock']   (optional) TODO: type description here
-     * @param integer  $options['page']               (optional) TODO: type description here
+     * @param string   $options['accountIdentifier']  (optional) Account identifier
+     * @param string   $options['customerIdentifier'] (optional) Customer identifier
+     * @param string   $options['externalRefID']      (optional) External reference id
+     * @param DateTime $options['startDate']          (optional) The start date
+     * @param DateTime $options['endDate']            (optional) The end date
+     * @param integer  $options['elementsPerBlock']   (optional) The number of elements per page
+     * @param integer  $options['page']               (optional) The page number to return
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
@@ -207,7 +221,7 @@ class OrdersController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'       => 'TangoCardv2NGSDK',
+            'user-agent'       => 'V2NGSDK',
             'Accept'           => 'application/json'
         );
 
@@ -231,6 +245,11 @@ class OrdersController extends BaseController
             $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
         }
 
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
+        }
+
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
 
@@ -240,17 +259,17 @@ class OrdersController extends BaseController
     }
 
     /**
-     * @todo Add general description for this endpoint
+     * Places an order
      *
-     * @param string $referenceOrderID TODO: type description here
+     * @param Models\CreateOrderRequestModel $body A CreateOrderRequest object
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
-    public function createResendOrder(
-        $referenceOrderID
+    public function createOrder(
+        $body
     ) {
         //check that all required arguments are provided
-        if (!isset($referenceOrderID)) {
+        if (!isset($body)) {
             throw new \InvalidArgumentException("One or more required arguments were NULL.");
         }
 
@@ -259,20 +278,16 @@ class OrdersController extends BaseController
         $_queryBuilder = Configuration::getBaseUri();
         
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/orders/{referenceOrderID}/resends';
-
-        //process optional query parameters
-        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
-            'referenceOrderID' => $referenceOrderID,
-            ));
+        $_queryBuilder = $_queryBuilder.'/orders';
 
         //validate and preprocess url
         $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
 
         //prepare headers
         $_headers = array (
-            'user-agent'     => 'TangoCardv2NGSDK',
-            'Accept'         => 'application/json'
+            'user-agent'    => 'V2NGSDK',
+            'Accept'        => 'application/json',
+            'content-type'  => 'application/json; charset=utf-8'
         );
 
         //set HTTP basic auth parameters
@@ -285,7 +300,7 @@ class OrdersController extends BaseController
         }
 
         //and invoke the API call request to fetch the response
-        $response = Request::post($_queryUrl, $_headers);
+        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($body));
 
         $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
         $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
@@ -295,12 +310,17 @@ class OrdersController extends BaseController
             $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
         }
 
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
+        }
+
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
 
         $mapper = $this->getJsonMapper();
 
-        return $mapper->mapClass($response->body, 'RaasLib\\Models\\ResendOrderResponseModel');
+        return $mapper->mapClass($response->body, 'RaasLib\\Models\\OrderModel');
     }
 
 

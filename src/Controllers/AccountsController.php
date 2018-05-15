@@ -43,71 +43,7 @@ class AccountsController extends BaseController
     }
 
     /**
-     * Get an account
-     *
-     * @param string $accountIdentifier Account Identifier
-     * @return mixed response from the API call
-     * @throws APIException Thrown if API call fails
-     */
-    public function getAccount(
-        $accountIdentifier
-    ) {
-        //check that all required arguments are provided
-        if (!isset($accountIdentifier)) {
-            throw new \InvalidArgumentException("One or more required arguments were NULL.");
-        }
-
-
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
-        //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/accounts/{accountIdentifier}';
-
-        //process optional query parameters
-        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
-            'accountIdentifier' => $accountIdentifier,
-            ));
-
-        //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
-
-        //prepare headers
-        $_headers = array (
-            'user-agent'      => 'TangoCardv2NGSDK',
-            'Accept'          => 'application/json'
-        );
-
-        //set HTTP basic auth parameters
-        Request::auth(Configuration::$platformName, Configuration::$platformKey);
-
-        //call on-before Http callback
-        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
-        }
-
-        //and invoke the API call request to fetch the response
-        $response = Request::get($_queryUrl, $_headers);
-
-        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
-        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
-
-        //call on-after Http callback
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
-        }
-
-        //handle errors defined at the API level
-        $this->validateResponse($_httpResponse, $_httpContext);
-
-        $mapper = $this->getJsonMapper();
-
-        return $mapper->mapClass($response->body, 'RaasLib\\Models\\AccountModel');
-    }
-
-    /**
-     * Gets a list of accounts for a given customer
+     * Retrieves a list of accounts for a given customer
      *
      * @param string $customerIdentifier Customer Identifier
      * @return mixed response from the API call
@@ -138,7 +74,7 @@ class AccountsController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'       => 'TangoCardv2NGSDK',
+            'user-agent'       => 'V2NGSDK',
             'Accept'           => 'application/json'
         );
 
@@ -162,6 +98,11 @@ class AccountsController extends BaseController
             $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
         }
 
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
+        }
+
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
 
@@ -171,7 +112,7 @@ class AccountsController extends BaseController
     }
 
     /**
-     * Create an account under a given customer
+     * Creates an account under a given customer
      *
      * @param string                           $customerIdentifier Customer Identifier
      * @param Models\CreateAccountRequestModel $body               Request Body
@@ -204,7 +145,7 @@ class AccountsController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'       => 'TangoCardv2NGSDK',
+            'user-agent'       => 'V2NGSDK',
             'Accept'           => 'application/json',
             'content-type'     => 'application/json; charset=utf-8'
         );
@@ -229,6 +170,11 @@ class AccountsController extends BaseController
             $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
         }
 
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
+        }
+
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
 
@@ -238,7 +184,7 @@ class AccountsController extends BaseController
     }
 
     /**
-     * Gets all accounts under the platform
+     * Retrieves all accounts under the platform
      *
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
@@ -257,7 +203,7 @@ class AccountsController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'TangoCardv2NGSDK',
+            'user-agent'    => 'V2NGSDK',
             'Accept'        => 'application/json'
         );
 
@@ -281,11 +227,85 @@ class AccountsController extends BaseController
             $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
         }
 
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
+        }
+
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
 
         $mapper = $this->getJsonMapper();
 
         return $mapper->mapClassArray($response->body, 'RaasLib\\Models\\AccountModel');
+    }
+
+    /**
+     * Retrieves a single account
+     *
+     * @param string $accountIdentifier Account Identifier
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function getAccount(
+        $accountIdentifier
+    ) {
+        //check that all required arguments are provided
+        if (!isset($accountIdentifier)) {
+            throw new \InvalidArgumentException("One or more required arguments were NULL.");
+        }
+
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::getBaseUri();
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/accounts/{accountIdentifier}';
+
+        //process optional query parameters
+        $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
+            'accountIdentifier' => $accountIdentifier,
+            ));
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'      => 'V2NGSDK',
+            'Accept'          => 'application/json'
+        );
+
+        //set HTTP basic auth parameters
+        Request::auth(Configuration::$platformName, Configuration::$platformKey);
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        $mapper = $this->getJsonMapper();
+
+        return $mapper->mapClass($response->body, 'RaasLib\\Models\\AccountModel');
     }
 }

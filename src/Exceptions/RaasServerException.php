@@ -9,6 +9,7 @@ namespace RaasLib\Exceptions;
 
 use RaasLib\APIException;
 use RaasLib\APIHelper;
+use RaasLib\Utils\DateTimeHelper;
 
 /**
  * RaaS API 5xx Exception
@@ -18,6 +19,7 @@ class RaasServerException extends APIException
     /**
      * Request timestamp
      * @required
+     * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $timestamp public property
      */
     public $timestamp;

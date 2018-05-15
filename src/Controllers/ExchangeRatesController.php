@@ -55,14 +55,14 @@ class ExchangeRatesController extends BaseController
         $_queryBuilder = Configuration::getBaseUri();
         
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/exchangerate';
+        $_queryBuilder = $_queryBuilder.'/exchangerates';
 
         //validate and preprocess url
         $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'TangoCardv2NGSDK',
+            'user-agent'    => 'V2NGSDK',
             'Accept'        => 'application/json'
         );
 
@@ -84,6 +84,11 @@ class ExchangeRatesController extends BaseController
         //call on-after Http callback
         if ($this->getHttpCallBack() != null) {
             $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
         }
 
         //handle errors defined at the API level

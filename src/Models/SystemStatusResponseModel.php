@@ -10,12 +10,12 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * System Status Response Model
+ *Represents the response returned from the status endpoint
  */
 class SystemStatusResponseModel implements JsonSerializable
 {
     /**
-     * System Status
+     * The status of the system
      * @required
      * @var string $status public property
      */

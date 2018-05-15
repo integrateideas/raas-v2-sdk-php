@@ -10,68 +10,68 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Billing Address
+ *Represents a Billing Address
  */
 class BillingAddressModel implements JsonSerializable
 {
     /**
-     * @todo Write general description for this property
+     * The first name
      * @required
      * @var string $firstName public property
      */
     public $firstName;
 
     /**
-     * @todo Write general description for this property
+     * The last name
      * @required
      * @var string $lastName public property
      */
     public $lastName;
 
     /**
-     * @todo Write general description for this property
+     * The address
      * @required
      * @var string $addressLine1 public property
      */
     public $addressLine1;
 
     /**
-     * @todo Write general description for this property
+     * The city
      * @required
      * @var string $city public property
      */
     public $city;
 
     /**
-     * @todo Write general description for this property
+     * The state/province
      * @required
      * @var string $state public property
      */
     public $state;
 
     /**
-     * @todo Write general description for this property
+     * The postal code
      * @required
      * @var string $postalCode public property
      */
     public $postalCode;
 
     /**
-     * 2-letter country code
+     * The 2-letter country code
      * @required
      * @var string $country public property
      */
     public $country;
 
     /**
-     * billing email address
+     * The billing contact's email address
      * @required
      * @var string $emailAddress public property
      */
     public $emailAddress;
 
     /**
-     * @todo Write general description for this property
+     * An optional second address line
      * @var string|null $addressLine2 public property
      */
     public $addressLine2;

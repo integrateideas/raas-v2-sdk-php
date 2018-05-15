@@ -10,26 +10,26 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * New Credit Card
+ *Represents the credit card information required to register a credit card
  */
 class NewCreditCardModel implements JsonSerializable
 {
     /**
-     * card number
+     * The credit card number
      * @required
      * @var string $number public property
      */
     public $number;
 
     /**
-     * card expiration date in YYYY-MM format
+     * The credit card expiration date in YYYY-MM format
      * @required
      * @var string $expiration public property
      */
     public $expiration;
 
     /**
-     * 3 or 4 digit card security code on the back of card
+     * The 3 or 4 digit card security code on the back of card
      * @required
      * @var string $verificationNumber public property
      */

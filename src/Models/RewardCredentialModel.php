@@ -10,26 +10,26 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Reward Credential Model
+ *Represents a Reward Credential
  */
 class RewardCredentialModel implements JsonSerializable
 {
     /**
-     * Credential Label
+     * The label of the credential
      * @required
      * @var string $label public property
      */
     public $label;
 
     /**
-     * Credential Value
+     * The actual credential
      * @required
      * @var string $value public property
      */
     public $value;
 
     /**
-     * Credential Type
+     * The type of the credential
      * @required
      * @var string $type public property
      */

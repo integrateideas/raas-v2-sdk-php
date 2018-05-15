@@ -29,8 +29,9 @@ class BaseController
      /**
      * Constructor that sets the timeout of requests
      */
-    function __construct(){
-        Request::timeout(15);
+    protected function __construct()
+    {
+        Request::timeout(60);
     }
 
     /**

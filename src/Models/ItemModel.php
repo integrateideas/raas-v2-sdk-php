@@ -11,54 +11,54 @@ use JsonSerializable;
 use RaasLib\Utils\DateTimeHelper;
 
 /**
- * Item Model
+ *Represents an item
  */
 class ItemModel implements JsonSerializable
 {
     /**
-     * UTID
+     * The UTID
      * @required
      * @var string $utid public property
      */
     public $utid;
 
     /**
-     * Reward Name
+     * The reward name
      * @required
      * @var string $rewardName public property
      */
     public $rewardName;
 
     /**
-     * Currency Code
+     * The currency code
      * @required
      * @var string $currencyCode public property
      */
     public $currencyCode;
 
     /**
-     * Status
+     * The item's status
      * @required
      * @var string $status public property
      */
     public $status;
 
     /**
-     * Value Type (fixed/variable)
+     * The item's value type (VARIABLE_VALUE or FIXED_VALUE)
      * @required
      * @var string $valueType public property
      */
     public $valueType;
 
     /**
-     * Reward Type
+     * The reward type
      * @required
      * @var string $rewardType public property
      */
     public $rewardType;
 
     /**
-     * Date Created
+     * The date the item was created
      * @required
      * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $createdDate public property
@@ -66,7 +66,7 @@ class ItemModel implements JsonSerializable
     public $createdDate;
 
     /**
-     * Last Updated
+     * The date the item was last updated
      * @required
      * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $lastUpdateDate public property
@@ -74,26 +74,26 @@ class ItemModel implements JsonSerializable
     public $lastUpdateDate;
 
     /**
-     * Countries
+     * The countries this item is valid in
      * @required
      * @var array $countries public property
      */
     public $countries;
 
     /**
-     * Minimum Value (for variable value items)
+     * The minimum orderable value (for variable value items)
      * @var double|null $minValue public property
      */
     public $minValue;
 
     /**
-     * Maximum Value (for variable value items)
+     * The maximum orderable value (for variable value items)
      * @var double|null $maxValue public property
      */
     public $maxValue;
 
     /**
-     * Face Value
+     * The face value of the gift card
      * @var double|null $faceValue public property
      */
     public $faceValue;

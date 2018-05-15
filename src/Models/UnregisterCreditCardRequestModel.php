@@ -10,26 +10,26 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Unregister Credit Card Request
+ *Represents the request to remove a credit card
  */
 class UnregisterCreditCardRequestModel implements JsonSerializable
 {
     /**
-     * @todo Write general description for this property
+     * The customer identifier
      * @required
      * @var string $customerIdentifier public property
      */
     public $customerIdentifier;
 
     /**
-     * @todo Write general description for this property
+     * The account identifier
      * @required
      * @var string $accountIdentifier public property
      */
     public $accountIdentifier;
 
     /**
-     * @todo Write general description for this property
+     * The credit card token
      * @required
      * @var string $creditCardToken public property
      */

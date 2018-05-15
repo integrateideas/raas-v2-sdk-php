@@ -11,26 +11,26 @@ use JsonSerializable;
 use RaasLib\Utils\DateTimeHelper;
 
 /**
- * Fund Account Response
+ *Represents the response from a place deposit call
  */
 class DepositResponseModel implements JsonSerializable
 {
     /**
-     * @todo Write general description for this property
+     * The funding amount
      * @required
      * @var double $amount public property
      */
     public $amount;
 
     /**
-     * @todo Write general description for this property
+     * The amount charged, after fees
      * @required
      * @var double $amountCharged public property
      */
     public $amountCharged;
 
     /**
-     * @todo Write general description for this property
+     * The date the transaction was created
      * @required
      * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $createdDate public property
@@ -38,21 +38,21 @@ class DepositResponseModel implements JsonSerializable
     public $createdDate;
 
     /**
-     * @todo Write general description for this property
+     * The processing fee percentage
      * @required
      * @var double $feePercent public property
      */
     public $feePercent;
 
     /**
-     * @todo Write general description for this property
+     * The deposit reference id
      * @required
      * @var string $referenceDepositID public property
      */
     public $referenceDepositID;
 
     /**
-     * @todo Write general description for this property
+     * The status of the transaction
      * @required
      * @var string $status public property
      */

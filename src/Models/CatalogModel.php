@@ -10,7 +10,7 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Catalog Model
+ *Represents a Catalog
  */
 class CatalogModel implements JsonSerializable
 {

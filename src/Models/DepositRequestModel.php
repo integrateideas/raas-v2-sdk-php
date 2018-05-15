@@ -10,33 +10,33 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Fund Account Request
+ *Represents the request to deposit funds via credit card
  */
 class DepositRequestModel implements JsonSerializable
 {
     /**
-     * @todo Write general description for this property
+     * The customer identifier
      * @required
      * @var string $customerIdentifier public property
      */
     public $customerIdentifier;
 
     /**
-     * @todo Write general description for this property
+     * The account identifier
      * @required
      * @var string $accountIdentifier public property
      */
     public $accountIdentifier;
 
     /**
-     * @todo Write general description for this property
+     * The credit card token
      * @required
      * @var string $creditCardToken public property
      */
     public $creditCardToken;
 
     /**
-     * @todo Write general description for this property
+     * The amount to fund
      * @required
      * @var double $amount public property
      */

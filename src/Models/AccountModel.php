@@ -11,40 +11,47 @@ use JsonSerializable;
 use RaasLib\Utils\DateTimeHelper;
 
 /**
- * Account Model
+ *Represents an Account
  */
 class AccountModel implements JsonSerializable
 {
     /**
-     * Account Identifier
+     * An account identifier
      * @required
      * @var string $accountIdentifier public property
      */
     public $accountIdentifier;
 
     /**
-     * Display Name
+     * An account number
+     * @required
+     * @var string $accountNumber public property
+     */
+    public $accountNumber;
+
+    /**
+     * A display name
      * @required
      * @var string $displayName public property
      */
     public $displayName;
 
     /**
-     * Currency Code
+     * The currency code for the account
      * @required
      * @var string $currencyCode public property
      */
     public $currencyCode;
 
     /**
-     * Current Balance
+     * The current balance of the account
      * @required
      * @var double $currentBalance public property
      */
     public $currentBalance;
 
     /**
-     * Date Created
+     * The date the account was created
      * @required
      * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $createdAt public property
@@ -52,14 +59,14 @@ class AccountModel implements JsonSerializable
     public $createdAt;
 
     /**
-     * Status
+     * The status of the account
      * @required
      * @var string $status public property
      */
     public $status;
 
     /**
-     * Contact Email
+     * The contact email on file for the account
      * @var string|null $contactEmail public property
      */
     public $contactEmail;
@@ -67,6 +74,7 @@ class AccountModel implements JsonSerializable
     /**
      * Constructor to set initial or default values of member properties
      * @param string    $accountIdentifier Initialization value for $this->accountIdentifier
+     * @param string    $accountNumber     Initialization value for $this->accountNumber
      * @param string    $displayName       Initialization value for $this->displayName
      * @param string    $currencyCode      Initialization value for $this->currencyCode
      * @param double    $currentBalance    Initialization value for $this->currentBalance
@@ -77,14 +85,15 @@ class AccountModel implements JsonSerializable
     public function __construct()
     {
         switch (func_num_args()) {
-            case 7:
+            case 8:
                 $this->accountIdentifier = func_get_arg(0);
-                $this->displayName       = func_get_arg(1);
-                $this->currencyCode      = func_get_arg(2);
-                $this->currentBalance    = func_get_arg(3);
-                $this->createdAt         = func_get_arg(4);
-                $this->status            = func_get_arg(5);
-                $this->contactEmail      = func_get_arg(6);
+                $this->accountNumber     = func_get_arg(1);
+                $this->displayName       = func_get_arg(2);
+                $this->currencyCode      = func_get_arg(3);
+                $this->currentBalance    = func_get_arg(4);
+                $this->createdAt         = func_get_arg(5);
+                $this->status            = func_get_arg(6);
+                $this->contactEmail      = func_get_arg(7);
                 break;
 
             default:
@@ -101,6 +110,7 @@ class AccountModel implements JsonSerializable
     {
         $json = array();
         $json['accountIdentifier'] = $this->accountIdentifier;
+        $json['accountNumber']     = $this->accountNumber;
         $json['displayName']       = $this->displayName;
         $json['currencyCode']      = $this->currencyCode;
         $json['currentBalance']    = $this->currentBalance;

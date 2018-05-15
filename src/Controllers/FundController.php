@@ -43,118 +43,6 @@ class FundController extends BaseController
     }
 
     /**
-     * List all credit cards registered on this platform
-     *
-     * @return mixed response from the API call
-     * @throws APIException Thrown if API call fails
-     */
-    public function getCreditCards()
-    {
-
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
-        //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/creditCards';
-
-        //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
-
-        //prepare headers
-        $_headers = array (
-            'user-agent'    => 'TangoCardv2NGSDK',
-            'Accept'        => 'application/json'
-        );
-
-        //set HTTP basic auth parameters
-        Request::auth(Configuration::$platformName, Configuration::$platformKey);
-
-        //call on-before Http callback
-        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
-        }
-
-        //and invoke the API call request to fetch the response
-        $response = Request::get($_queryUrl, $_headers);
-
-        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
-        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
-
-        //call on-after Http callback
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
-        }
-
-        //handle errors defined at the API level
-        $this->validateResponse($_httpResponse, $_httpContext);
-
-        $mapper = $this->getJsonMapper();
-
-        return $mapper->mapClassArray($response->body, 'RaasLib\\Models\\CreditCardModel');
-    }
-
-    /**
-     * Register a new credit card
-     *
-     * @param Models\CreateCreditCardRequestModel $body TODO: type description here
-     * @return mixed response from the API call
-     * @throws APIException Thrown if API call fails
-     */
-    public function createCreditCard(
-        $body
-    ) {
-        //check that all required arguments are provided
-        if (!isset($body)) {
-            throw new \InvalidArgumentException("One or more required arguments were NULL.");
-        }
-
-
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
-        //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/creditCards';
-
-        //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
-
-        //prepare headers
-        $_headers = array (
-            'user-agent'    => 'TangoCardv2NGSDK',
-            'Accept'        => 'application/json',
-            'content-type'  => 'application/json; charset=utf-8'
-        );
-
-        //set HTTP basic auth parameters
-        Request::auth(Configuration::$platformName, Configuration::$platformKey);
-
-        //call on-before Http callback
-        $_httpRequest = new HttpRequest(HttpMethod::POST, $_headers, $_queryUrl);
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
-        }
-
-        //and invoke the API call request to fetch the response
-        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($body));
-
-        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
-        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
-
-        //call on-after Http callback
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
-        }
-
-        //handle errors defined at the API level
-        $this->validateResponse($_httpResponse, $_httpContext);
-
-        $mapper = $this->getJsonMapper();
-
-        return $mapper->mapClass($response->body, 'RaasLib\\Models\\CreditCardModel');
-    }
-
-    /**
      * Unregister a credit card
      *
      * @param Models\UnregisterCreditCardRequestModel $body TODO: type description here
@@ -181,7 +69,7 @@ class FundController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'TangoCardv2NGSDK',
+            'user-agent'    => 'V2NGSDK',
             'Accept'        => 'application/json',
             'content-type'  => 'application/json; charset=utf-8'
         );
@@ -204,6 +92,11 @@ class FundController extends BaseController
         //call on-after Http callback
         if ($this->getHttpCallBack() != null) {
             $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
         }
 
         //handle errors defined at the API level
@@ -215,69 +108,9 @@ class FundController extends BaseController
     }
 
     /**
-     * Fund an account
-     *
-     * @param Models\DepositRequestModel $body TODO: type description here
-     * @return mixed response from the API call
-     * @throws APIException Thrown if API call fails
-     */
-    public function createDeposit(
-        $body
-    ) {
-        //check that all required arguments are provided
-        if (!isset($body)) {
-            throw new \InvalidArgumentException("One or more required arguments were NULL.");
-        }
-
-
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
-        //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/creditCardDeposits';
-
-        //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
-
-        //prepare headers
-        $_headers = array (
-            'user-agent'    => 'TangoCardv2NGSDK',
-            'Accept'        => 'application/json',
-            'content-type'  => 'application/json; charset=utf-8'
-        );
-
-        //set HTTP basic auth parameters
-        Request::auth(Configuration::$platformName, Configuration::$platformKey);
-
-        //call on-before Http callback
-        $_httpRequest = new HttpRequest(HttpMethod::POST, $_headers, $_queryUrl);
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
-        }
-
-        //and invoke the API call request to fetch the response
-        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($body));
-
-        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
-        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
-
-        //call on-after Http callback
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
-        }
-
-        //handle errors defined at the API level
-        $this->validateResponse($_httpResponse, $_httpContext);
-
-        $mapper = $this->getJsonMapper();
-
-        return $mapper->mapClass($response->body, 'RaasLib\\Models\\DepositResponseModel');
-    }
-
-    /**
      * Get details for a specific credit card deposit
      *
-     * @param string $depositId Deposit ID
+     * @param string $depositId The reference deposit id
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
@@ -306,7 +139,7 @@ class FundController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'TangoCardv2NGSDK',
+            'user-agent'    => 'V2NGSDK',
             'Accept'        => 'application/json'
         );
 
@@ -330,6 +163,11 @@ class FundController extends BaseController
             $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
         }
 
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
+        }
+
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
 
@@ -339,9 +177,131 @@ class FundController extends BaseController
     }
 
     /**
-     * Get details for a specific credit card
+     * Funds an account via credit card
      *
-     * @param string $token Card Token
+     * @param Models\DepositRequestModel $body TODO: type description here
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function addFunds(
+        $body
+    ) {
+        //check that all required arguments are provided
+        if (!isset($body)) {
+            throw new \InvalidArgumentException("One or more required arguments were NULL.");
+        }
+
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::getBaseUri();
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/creditCardDeposits';
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'    => 'V2NGSDK',
+            'Accept'        => 'application/json',
+            'content-type'  => 'application/json; charset=utf-8'
+        );
+
+        //set HTTP basic auth parameters
+        Request::auth(Configuration::$platformName, Configuration::$platformKey);
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::POST, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($body));
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        $mapper = $this->getJsonMapper();
+
+        return $mapper->mapClass($response->body, 'RaasLib\\Models\\DepositResponseModel');
+    }
+
+    /**
+     * Retrieves all credit cards registered on the platform
+     *
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function getCreditCards()
+    {
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::getBaseUri();
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/creditCards';
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'    => 'V2NGSDK',
+            'Accept'        => 'application/json'
+        );
+
+        //set HTTP basic auth parameters
+        Request::auth(Configuration::$platformName, Configuration::$platformKey);
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        $mapper = $this->getJsonMapper();
+
+        return $mapper->mapClassArray($response->body, 'RaasLib\\Models\\CreditCardModel');
+    }
+
+    /**
+     * Retrieves details for a single credit card
+     *
+     * @param string $token Credit Card Token
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
@@ -370,7 +330,7 @@ class FundController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'TangoCardv2NGSDK',
+            'user-agent'    => 'V2NGSDK',
             'Accept'        => 'application/json'
         );
 
@@ -392,6 +352,76 @@ class FundController extends BaseController
         //call on-after Http callback
         if ($this->getHttpCallBack() != null) {
             $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        $mapper = $this->getJsonMapper();
+
+        return $mapper->mapClass($response->body, 'RaasLib\\Models\\CreditCardModel');
+    }
+
+    /**
+     * Registers a new credit card
+     *
+     * @param Models\CreateCreditCardRequestModel $body A CreateCreditCardRequest object
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function createRegisterCreditCard(
+        $body
+    ) {
+        //check that all required arguments are provided
+        if (!isset($body)) {
+            throw new \InvalidArgumentException("One or more required arguments were NULL.");
+        }
+
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::getBaseUri();
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/creditCards';
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'    => 'V2NGSDK',
+            'Accept'        => 'application/json',
+            'content-type'  => 'application/json; charset=utf-8'
+        );
+
+        //set HTTP basic auth parameters
+        Request::auth(Configuration::$platformName, Configuration::$platformKey);
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::POST, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($body));
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
         }
 
         //handle errors defined at the API level

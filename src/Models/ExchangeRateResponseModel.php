@@ -10,19 +10,19 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Exchange Rate Response Model
+ *Represents the response from the get exchange rates call
  */
 class ExchangeRateResponseModel implements JsonSerializable
 {
     /**
-     * Disclaimer
+     * A disclaimer about the exchange rates returned
      * @required
      * @var string $disclaimer public property
      */
     public $disclaimer;
 
     /**
-     * Exchange Rates
+     * An array of ExchangeRate objects
      * @required
      * @var \RaasLib\Models\ExchangeRateModel[] $exchangeRates public property
      */

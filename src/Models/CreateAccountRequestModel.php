@@ -10,26 +10,26 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Create Account Request
+ *Represents the request to create an account
  */
 class CreateAccountRequestModel implements JsonSerializable
 {
     /**
-     * Account Identifier
+     * The account identifier
      * @required
      * @var string $accountIdentifier public property
      */
     public $accountIdentifier;
 
     /**
-     * Display Name
+     * The display name
      * @required
      * @var string $displayName public property
      */
     public $displayName;
 
     /**
-     * Contact Email
+     * The contact email
      * @required
      * @var string $contactEmail public property
      */

@@ -11,12 +11,12 @@ use JsonSerializable;
 use RaasLib\Utils\DateTimeHelper;
 
 /**
- * Unregister Credit Card Response
+ *Represents the response from the unregister credit card call
  */
 class UnregisterCreditCardResponseModel implements JsonSerializable
 {
     /**
-     * @todo Write general description for this property
+     * The date the card was removed
      * @required
      * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $createdDate public property
@@ -24,14 +24,14 @@ class UnregisterCreditCardResponseModel implements JsonSerializable
     public $createdDate;
 
     /**
-     * @todo Write general description for this property
+     * A message describing the status of the card
      * @required
      * @var string $message public property
      */
     public $message;
 
     /**
-     * @todo Write general description for this property
+     * The credit card token
      * @required
      * @var string $token public property
      */

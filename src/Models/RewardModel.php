@@ -10,7 +10,7 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Reward Model
+ *Represents a Reward
  */
 class RewardModel implements JsonSerializable
 {

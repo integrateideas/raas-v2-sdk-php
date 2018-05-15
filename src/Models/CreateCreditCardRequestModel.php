@@ -10,51 +10,57 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Register Credit Card Request
+ *Represents the request to register a credit card
  */
 class CreateCreditCardRequestModel implements JsonSerializable
 {
     /**
-     * @todo Write general description for this property
+     * The customer identifier
      * @required
      * @var string $customerIdentifier public property
      */
     public $customerIdentifier;
 
     /**
-     * @todo Write general description for this property
+     * The account identifier
      * @required
      * @var string $accountIdentifier public property
      */
     public $accountIdentifier;
 
     /**
-     * @todo Write general description for this property
+     * The credit card's label/nickname
      * @required
      * @var string $label public property
      */
     public $label;
 
     /**
-     * @todo Write general description for this property
+     * The IP address of the user registering the card
      * @required
      * @var string $ipAddress public property
      */
     public $ipAddress;
 
     /**
-     * @todo Write general description for this property
+     * A NewCreditCard object
      * @required
      * @var \RaasLib\Models\NewCreditCardModel $creditCard public property
      */
     public $creditCard;
 
     /**
-     * @todo Write general description for this property
+     * A BillingAddress object
      * @required
      * @var \RaasLib\Models\BillingAddressModel $billingAddress public property
      */
     public $billingAddress;
+
+    /**
+     * An optional array of FullNameEmail objects
+     * @var \RaasLib\Models\FullNameEmailModel[]|null $contactInformation public property
+     */
+    public $contactInformation;
 
     /**
      * Constructor to set initial or default values of member properties
@@ -64,16 +70,18 @@ class CreateCreditCardRequestModel implements JsonSerializable
      * @param string              $ipAddress          Initialization value for $this->ipAddress
      * @param NewCreditCardModel  $creditCard         Initialization value for $this->creditCard
      * @param BillingAddressModel $billingAddress     Initialization value for $this->billingAddress
+     * @param array               $contactInformation Initialization value for $this->contactInformation
      */
     public function __construct()
     {
-        if (6 == func_num_args()) {
+        if (7 == func_num_args()) {
             $this->customerIdentifier = func_get_arg(0);
             $this->accountIdentifier  = func_get_arg(1);
             $this->label              = func_get_arg(2);
             $this->ipAddress          = func_get_arg(3);
             $this->creditCard         = func_get_arg(4);
             $this->billingAddress     = func_get_arg(5);
+            $this->contactInformation = func_get_arg(6);
         }
     }
 
@@ -90,6 +98,7 @@ class CreateCreditCardRequestModel implements JsonSerializable
         $json['ipAddress']          = $this->ipAddress;
         $json['creditCard']         = $this->creditCard;
         $json['billingAddress']     = $this->billingAddress;
+        $json['contactInformation'] = $this->contactInformation;
 
         return $json;
     }

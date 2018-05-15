@@ -11,12 +11,12 @@ use JsonSerializable;
 use RaasLib\Utils\DateTimeHelper;
 
 /**
- * Exchange Rate Model
+ *Represents an Exchange Rate
  */
 class ExchangeRateModel implements JsonSerializable
 {
     /**
-     * Last Modified
+     * When the exchange rate was last updated
      * @required
      * @factory \RaasLib\Utils\DateTimeHelper::fromRfc3339DateTime
      * @var \DateTime $lastModifiedDate public property
@@ -24,21 +24,21 @@ class ExchangeRateModel implements JsonSerializable
     public $lastModifiedDate;
 
     /**
-     * Reward Currency
+     * The reward currency
      * @required
      * @var string $rewardCurrency public property
      */
     public $rewardCurrency;
 
     /**
-     * Base Currency
+     * The base currency
      * @required
      * @var string $baseCurrency public property
      */
     public $baseCurrency;
 
     /**
-     * Exchange Rate
+     * The exchange rate
      * @required
      * @var double $baseFx public property
      */

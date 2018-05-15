@@ -13,27 +13,12 @@ namespace RaasLib;
 class Environments
 {
     /**
-     * Sandbox (Fake) Environment
+     * The sandbox environment does not use real money and can be used for testing.
      */
     const SANDBOX = "sandbox";
 
     /**
-     * Production (Live) Environment
+     * The production environment uses real money and is for live transactions.
      */
     const PRODUCTION = "production";
-
-    /**
-     * Tango Card Internal Use Only
-     */
-    const QA = "qa";
-
-    /**
-     * Tango Card Internal Use Only
-     */
-    const GAMMA = "gamma";
-
-    /**
-     * Tango Card Internal Use Only
-     */
-    const LOCAL = "local";
 }

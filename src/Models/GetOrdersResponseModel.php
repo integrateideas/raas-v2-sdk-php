@@ -10,7 +10,7 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Get Orders Response
+ *Represents the response from the get orders call
  */
 class GetOrdersResponseModel implements JsonSerializable
 {
@@ -23,8 +23,7 @@ class GetOrdersResponseModel implements JsonSerializable
 
     /**
      * An array of orders
-     * @required
-     * @var \RaasLib\Models\OrderModel[] $orders public property
+     * @var \RaasLib\Models\OrderSummaryModel[]|null $orders public property
      */
     public $orders;
 

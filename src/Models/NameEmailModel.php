@@ -10,26 +10,26 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Name and Email Model
+ *Represents a name and an email address
  */
 class NameEmailModel implements JsonSerializable
 {
     /**
-     * Email Address
+     * An email address
      * @required
      * @var string $email public property
      */
     public $email;
 
     /**
-     * First Name
+     * A first name
      * @required
      * @var string $firstName public property
      */
     public $firstName;
 
     /**
-     * Last Name
+     * A last name
      * @var string|null $lastName public property
      */
     public $lastName;

@@ -10,33 +10,33 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * RaaS 4xx Error
+ *Represents a RaaS 4xx Error
  */
 class RaasClientErrorModel implements JsonSerializable
 {
     /**
-     * Error Path
+     * The path to the invalid value
      * @required
      * @var string $path public property
      */
     public $path;
 
     /**
-     * Error Message
+     * The error message
      * @required
      * @var string $message public property
      */
     public $message;
 
     /**
-     * Constraint
+     * The constraint validated
      * @required
      * @var string $constraint public property
      */
     public $constraint;
 
     /**
-     * Invalid Value
+     * The value that was invalid
      * @var string|null $invalidValue public property
      */
     public $invalidValue;

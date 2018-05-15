@@ -43,7 +43,7 @@ class CatalogController extends BaseController
     }
 
     /**
-     * Get Catalog
+     * Retrieves a platform's catalog
      *
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
@@ -62,7 +62,7 @@ class CatalogController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'TangoCardv2NGSDK',
+            'user-agent'    => 'V2NGSDK',
             'Accept'        => 'application/json'
         );
 
@@ -84,6 +84,11 @@ class CatalogController extends BaseController
         //call on-after Http callback
         if ($this->getHttpCallBack() != null) {
             $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //Error handling using HTTP status codes
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
         }
 
         //handle errors defined at the API level

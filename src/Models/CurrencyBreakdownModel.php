@@ -10,36 +10,36 @@ namespace RaasLib\Models;
 use JsonSerializable;
 
 /**
- * Amount/Currency Breakdown
+ *Represents a breakdown of an amount and currency information
  */
 class CurrencyBreakdownModel implements JsonSerializable
 {
     /**
-     * Currency Code
+     * A 3 digit currency code
      * @var string|null $currencyCode public property
      */
     public $currencyCode;
 
     /**
-     * Exchange Rate
+     * The exchange rate
      * @var double|null $exchangeRate public property
      */
     public $exchangeRate;
 
     /**
-     * Fee
+     * The amount of the fee applied
      * @var double|null $fee public property
      */
     public $fee;
 
     /**
-     * Total
+     * The order total
      * @var double|null $total public property
      */
     public $total;
 
     /**
-     * Value
+     * The value of the order
      * @var double|null $value public property
      */
     public $value;
