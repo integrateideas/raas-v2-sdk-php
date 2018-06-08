@@ -74,7 +74,7 @@ class OrderSummaryModel implements JsonSerializable
     /**
      * The sender's information
      * @required
-     * @var string $sender public property
+     * @var \RaasLib\Models\NameEmailModel $sender public property
      */
     public $sender;
 
@@ -123,7 +123,7 @@ class OrderSummaryModel implements JsonSerializable
      * @param CurrencyBreakdownModel  $marginShare        Initialization value for $this->marginShare
      * @param string                  $utid               Initialization value for $this->utid
      * @param string                  $rewardName         Initialization value for $this->rewardName
-     * @param string                  $sender             Initialization value for $this->sender
+     * @param NameEmailModel          $sender             Initialization value for $this->sender
      * @param NameEmailModel          $recipient          Initialization value for $this->recipient
      * @param bool                    $sendEmail          Initialization value for $this->sendEmail
      * @param string                  $status             Initialization value for $this->status
