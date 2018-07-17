@@ -99,10 +99,6 @@ class AccountsController extends BaseController
         }
 
         //Error handling using HTTP status codes
-        if (($response->code < 200) || ($response->code > 208)) {
-            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
-        }
-
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
 
@@ -171,10 +167,6 @@ class AccountsController extends BaseController
         }
 
         //Error handling using HTTP status codes
-        if (($response->code < 200) || ($response->code > 208)) {
-            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
-        }
-
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
 
@@ -228,10 +220,6 @@ class AccountsController extends BaseController
         }
 
         //Error handling using HTTP status codes
-        if (($response->code < 200) || ($response->code > 208)) {
-            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
-        }
-
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
 
@@ -297,10 +285,6 @@ class AccountsController extends BaseController
         }
 
         //Error handling using HTTP status codes
-        if (($response->code < 200) || ($response->code > 208)) {
-            throw new Exceptions\RaasGenericException('API Error', $_httpContext);
-        }
-
         //handle errors defined at the API level
         $this->validateResponse($_httpResponse, $_httpContext);
 
