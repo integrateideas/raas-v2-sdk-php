@@ -202,8 +202,8 @@ class OrdersController extends BaseController
             'accountIdentifier'  => $this->val($options, 'accountIdentifier'),
             'customerIdentifier' => $this->val($options, 'customerIdentifier'),
             'externalRefID'      => $this->val($options, 'externalRefID'),
-            'startDate'          => $this->val($options, 'startDate'),
-            'endDate'            => $this->val($options, 'endDate'),
+            'startDate'          => DateTimeHelper::toRfc3339DateTime($this->val($options, 'startDate')),
+            'endDate'            => DateTimeHelper::toRfc3339DateTime($this->val($options, 'endDate')),
             'elementsPerBlock'   => $this->val($options, 'elementsPerBlock'),
             'page'               => $this->val($options, 'page'),
         ));
