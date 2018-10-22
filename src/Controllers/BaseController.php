@@ -67,31 +67,24 @@ class BaseController
         if ($response->getStatusCode() == 400) {
             throw new Exceptions\RaasClientException('Bad Request', $_httpContext);
         }
-
         if ($response->getStatusCode() == 401) {
             throw new Exceptions\RaasGenericException('Unauthorized - Invalid Credentials', $_httpContext);
         }
-
         if ($response->getStatusCode() == 403) {
             throw new Exceptions\RaasClientException('Forbidden', $_httpContext);
         }
-
         if ($response->getStatusCode() == 404) {
             throw new Exceptions\RaasGenericException('Not Found', $_httpContext);
         }
-
         if ($response->getStatusCode() == 409) {
             throw new Exceptions\RaasClientException('Conflict', $_httpContext);
         }
-
         if ($response->getStatusCode() == 500) {
             throw new Exceptions\RaasServerException('Internal Server Error - Retry Later', $_httpContext);
         }
-
         if ($response->getStatusCode() == 503) {
             throw new Exceptions\RaasServerException('Service Unavailable - Retry Later', $_httpContext);
         }
-
         if (($response->getStatusCode() < 200) || ($response->getStatusCode() > 208)) { //[200,208] = HTTP OK
             throw new Exceptions\RaasGenericException('API Error', $_httpContext);
         }

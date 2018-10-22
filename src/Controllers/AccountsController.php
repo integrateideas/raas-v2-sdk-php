@@ -110,17 +110,17 @@ class AccountsController extends BaseController
     /**
      * Creates an account under a given customer
      *
-     * @param string                           $customerIdentifier Customer Identifier
-     * @param Models\CreateAccountRequestModel $body               Request Body
+     * @param  array  $options    Array with all options for search
+     * @param string                           $options['customerIdentifier'] Customer Identifier
+     * @param Models\CreateAccountRequestModel $options['body']               Request Body
      * @return mixed response from the API call
      * @throws APIException Thrown if API call fails
      */
     public function createAccount(
-        $customerIdentifier,
-        $body
+        $options
     ) {
         //check that all required arguments are provided
-        if (!isset($customerIdentifier, $body)) {
+        if (!isset($options['customerIdentifier'], $options['body'])) {
             throw new \InvalidArgumentException("One or more required arguments were NULL.");
         }
 
@@ -133,7 +133,7 @@ class AccountsController extends BaseController
 
         //process optional query parameters
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
-            'customerIdentifier' => $customerIdentifier,
+            'customerIdentifier' => $this->val($options, 'customerIdentifier'),
             ));
 
         //validate and preprocess url
@@ -156,7 +156,7 @@ class AccountsController extends BaseController
         }
 
         //and invoke the API call request to fetch the response
-        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($body));
+        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($this->val($options, 'body')));
 
         $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
         $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
@@ -291,5 +291,21 @@ class AccountsController extends BaseController
         $mapper = $this->getJsonMapper();
 
         return $mapper->mapClass($response->body, 'RaasLib\\Models\\AccountModel');
+    }
+
+
+    /**
+    * Array access utility method
+     * @param  array          $arr         Array of values to read from
+     * @param  string         $key         Key to get the value from the array
+     * @param  mixed|null     $default     Default value to use if the key was not found
+     * @return mixed
+     */
+    private function val($arr, $key, $default = null)
+    {
+        if (isset($arr[$key])) {
+            return is_bool($arr[$key]) ? var_export($arr[$key], true) : $arr[$key];
+        }
+        return $default;
     }
 }

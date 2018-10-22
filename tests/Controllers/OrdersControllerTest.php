@@ -81,12 +81,12 @@ class OrdersControllerTest extends \PHPUnit_Framework_TestCase
                 "\": {\n    \"credentials\": {\n      \"Redemption URL\": \"https://sandbox.rewardlink.io/r/1/ed0HtzS" .
                 "blNV6oFddNnnlf68eXzGQoREvcxwxu_Vi5Wk\"\n    },\n    \"credentialList\": [\n      {\n        \"label" .
                 "\": \"Redemption URL\",\n        \"value\": \"https://sandbox.rewardlink.io/r/1/ed0HtzSblNV6oFddNnnl" .
-                "f68eXzGQoREvcxwxu_Vi5Wk\",\n        \"type\": \"url\"\n      }\n    ],\n    \"redemptionInstructions" .
-                "\": \"<p>&bull; Click on the redemption link above to activate your Reward Link.<br />\\r\\n&bull; N" .
-                "ext, you will be able to spend your balance on retail gift cards.</p>\\r\\n\\r\\n<p>If you don&#39;t" .
-                " want to spend your entire Reward Link value right away, save the email or URL and return via the re" .
-                "demption link - your value will be waiting to be spent. This allows you to store the balance to rede" .
-                "em at another time.</p>\\r\\n\"\n  }\n}",
+                "f68eXzGQoREvcxwxu_Vi5Wk\",\n        \"type\": \"url\",\n        \"credentialType\": \"redemptionUrl" .
+                "\"\n      }\n    ],\n    \"redemptionInstructions\": \"<p>&bull; Click on the redemption link above " .
+                "to activate your Reward Link.<br />\\r\\n&bull; Next, you will be able to spend your balance on reta" .
+                "il gift cards.</p>\\r\\n\\r\\n<p>If you don&#39;t want to spend your entire Reward Link value right " .
+                "away, save the email or URL and return via the redemption link - your value will be waiting to be sp" .
+                "ent. This allows you to store the balance to redeem at another time.</p>\\r\\n\"\n  }\n}",
                 $this->httpResponse->getResponse()->getRawBody(),
                 true,
                 true,
@@ -139,12 +139,12 @@ class OrdersControllerTest extends \PHPUnit_Framework_TestCase
                 "\": {\n    \"credentials\": {\n      \"Redemption URL\": \"https://sandbox.rewardlink.io/r/1/ed0HtzS" .
                 "blNV6oFddNnnlf68eXzGQoREvcxwxu_Vi5Wk\"\n    },\n    \"credentialList\": [\n      {\n        \"label" .
                 "\": \"Redemption URL\",\n        \"value\": \"https://sandbox.rewardlink.io/r/1/ed0HtzSblNV6oFddNnnl" .
-                "f68eXzGQoREvcxwxu_Vi5Wk\",\n        \"type\": \"url\"\n      }\n    ],\n    \"redemptionInstructions" .
-                "\": \"<p>&bull; Click on the redemption link above to activate your Reward Link.<br />\\r\\n&bull; N" .
-                "ext, you will be able to spend your balance on retail gift cards.</p>\\r\\n\\r\\n<p>If you don&#39;t" .
-                " want to spend your entire Reward Link value right away, save the email or URL and return via the re" .
-                "demption link - your value will be waiting to be spent. This allows you to store the balance to rede" .
-                "em at another time.</p>\\r\\n\"\n  }\n}",
+                "f68eXzGQoREvcxwxu_Vi5Wk\",\n        \"type\": \"url\",\n        \"credentialType\": \"redemptionUrl" .
+                "\"\n      }\n    ],\n    \"redemptionInstructions\": \"<p>&bull; Click on the redemption link above " .
+                "to activate your Reward Link.<br />\\r\\n&bull; Next, you will be able to spend your balance on reta" .
+                "il gift cards.</p>\\r\\n\\r\\n<p>If you don&#39;t want to spend your entire Reward Link value right " .
+                "away, save the email or URL and return via the redemption link - your value will be waiting to be sp" .
+                "ent. This allows you to store the balance to redeem at another time.</p>\\r\\n\"\n  }\n}",
                 $this->httpResponse->getResponse()->getRawBody(),
                 false,
                 true,
