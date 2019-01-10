@@ -51,14 +51,11 @@ class StatusController extends BaseController
     public function getSystemStatus()
     {
 
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/pulse';
+        $_queryBuilder = '/pulse';
 
         //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+        $_queryUrl = APIHelper::cleanUrl(Configuration::getBaseUri() . $_queryBuilder);
 
         //prepare headers
         $_headers = array (
