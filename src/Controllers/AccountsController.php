@@ -58,11 +58,8 @@ class AccountsController extends BaseController
         }
 
 
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/customers/{customerIdentifier}/accounts';
+        $_queryBuilder = '/customers/{customerIdentifier}/accounts';
 
         //process optional query parameters
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
@@ -70,7 +67,7 @@ class AccountsController extends BaseController
             ));
 
         //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+        $_queryUrl = APIHelper::cleanUrl(Configuration::getBaseUri() . $_queryBuilder);
 
         //prepare headers
         $_headers = array (
@@ -125,11 +122,8 @@ class AccountsController extends BaseController
         }
 
 
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/customers/{customerIdentifier}/accounts';
+        $_queryBuilder = '/customers/{customerIdentifier}/accounts';
 
         //process optional query parameters
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
@@ -137,7 +131,7 @@ class AccountsController extends BaseController
             ));
 
         //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+        $_queryUrl = APIHelper::cleanUrl(Configuration::getBaseUri() . $_queryBuilder);
 
         //prepare headers
         $_headers = array (
@@ -145,6 +139,9 @@ class AccountsController extends BaseController
             'Accept'           => 'application/json',
             'content-type'     => 'application/json; charset=utf-8'
         );
+
+        //json encode body
+        $_bodyJson = Request\Body::Json($this->val($options, 'body'));
 
         //set HTTP basic auth parameters
         Request::auth(Configuration::$platformName, Configuration::$platformKey);
@@ -156,7 +153,7 @@ class AccountsController extends BaseController
         }
 
         //and invoke the API call request to fetch the response
-        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($this->val($options, 'body')));
+        $response = Request::post($_queryUrl, $_headers, $_bodyJson);
 
         $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
         $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
@@ -184,14 +181,11 @@ class AccountsController extends BaseController
     public function getAllAccounts()
     {
 
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/accounts';
+        $_queryBuilder = '/accounts';
 
         //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+        $_queryUrl = APIHelper::cleanUrl(Configuration::getBaseUri() . $_queryBuilder);
 
         //prepare headers
         $_headers = array (
@@ -244,11 +238,8 @@ class AccountsController extends BaseController
         }
 
 
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/accounts/{accountIdentifier}';
+        $_queryBuilder = '/accounts/{accountIdentifier}';
 
         //process optional query parameters
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
@@ -256,7 +247,7 @@ class AccountsController extends BaseController
             ));
 
         //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+        $_queryUrl = APIHelper::cleanUrl(Configuration::getBaseUri() . $_queryBuilder);
 
         //prepare headers
         $_headers = array (
