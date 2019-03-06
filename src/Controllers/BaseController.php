@@ -21,6 +21,12 @@ use Unirest\Request;
 class BaseController
 {
     /**
+     * User-agent to be sent with API calls
+     * @var string
+     */
+    const USER_AGENT = 'V2NGSDK';
+
+    /**
      * HttpCallBack instance associated with this controller
      * @var HttpCallBack
      */

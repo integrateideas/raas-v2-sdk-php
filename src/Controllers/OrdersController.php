@@ -67,7 +67,7 @@ class OrdersController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'V2NGSDK',
+            'user-agent'    => BaseController::USER_AGENT,
             'Accept'        => 'application/json',
             'content-type'  => 'application/json; charset=utf-8'
         );
@@ -133,7 +133,7 @@ class OrdersController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'     => 'V2NGSDK',
+            'user-agent'     => BaseController::USER_AGENT,
             'Accept'         => 'application/json'
         );
 
@@ -197,7 +197,7 @@ class OrdersController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'        => 'V2NGSDK',
+            'user-agent'        => BaseController::USER_AGENT,
             'Accept'            => 'application/json',
             'content-type'      => 'application/json; charset=utf-8'
         );
@@ -271,7 +271,7 @@ class OrdersController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'       => 'V2NGSDK',
+            'user-agent'       => BaseController::USER_AGENT,
             'Accept'           => 'application/json'
         );
 

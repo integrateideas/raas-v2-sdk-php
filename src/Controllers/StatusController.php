@@ -59,7 +59,7 @@ class StatusController extends BaseController
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'V2NGSDK',
+            'user-agent'    => BaseController::USER_AGENT,
             'Accept'        => 'application/json'
         );
 
