@@ -58,21 +58,21 @@ class FundController extends BaseController
         }
 
 
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/creditCardUnregisters';
+        $_queryBuilder = '/creditCardUnregisters';
 
         //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+        $_queryUrl = APIHelper::cleanUrl(Configuration::getBaseUri() . $_queryBuilder);
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'V2NGSDK',
+            'user-agent'    => BaseController::USER_AGENT,
             'Accept'        => 'application/json',
             'content-type'  => 'application/json; charset=utf-8'
         );
+
+        //json encode body
+        $_bodyJson = Request\Body::Json($body);
 
         //set HTTP basic auth parameters
         Request::auth(Configuration::$platformName, Configuration::$platformKey);
@@ -84,7 +84,7 @@ class FundController extends BaseController
         }
 
         //and invoke the API call request to fetch the response
-        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($body));
+        $response = Request::post($_queryUrl, $_headers, $_bodyJson);
 
         $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
         $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
@@ -119,11 +119,8 @@ class FundController extends BaseController
         }
 
 
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/creditCardDeposits/{depositId}';
+        $_queryBuilder = '/creditCardDeposits/{depositId}';
 
         //process optional query parameters
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
@@ -131,11 +128,11 @@ class FundController extends BaseController
             ));
 
         //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+        $_queryUrl = APIHelper::cleanUrl(Configuration::getBaseUri() . $_queryBuilder);
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'V2NGSDK',
+            'user-agent'    => BaseController::USER_AGENT,
             'Accept'        => 'application/json'
         );
 
@@ -184,21 +181,21 @@ class FundController extends BaseController
         }
 
 
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/creditCardDeposits';
+        $_queryBuilder = '/creditCardDeposits';
 
         //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+        $_queryUrl = APIHelper::cleanUrl(Configuration::getBaseUri() . $_queryBuilder);
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'V2NGSDK',
+            'user-agent'    => BaseController::USER_AGENT,
             'Accept'        => 'application/json',
             'content-type'  => 'application/json; charset=utf-8'
         );
+
+        //json encode body
+        $_bodyJson = Request\Body::Json($body);
 
         //set HTTP basic auth parameters
         Request::auth(Configuration::$platformName, Configuration::$platformKey);
@@ -210,7 +207,7 @@ class FundController extends BaseController
         }
 
         //and invoke the API call request to fetch the response
-        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($body));
+        $response = Request::post($_queryUrl, $_headers, $_bodyJson);
 
         $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
         $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
@@ -238,18 +235,15 @@ class FundController extends BaseController
     public function getCreditCards()
     {
 
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/creditCards';
+        $_queryBuilder = '/creditCards';
 
         //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+        $_queryUrl = APIHelper::cleanUrl(Configuration::getBaseUri() . $_queryBuilder);
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'V2NGSDK',
+            'user-agent'    => BaseController::USER_AGENT,
             'Accept'        => 'application/json'
         );
 
@@ -298,11 +292,8 @@ class FundController extends BaseController
         }
 
 
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/creditCards/{token}';
+        $_queryBuilder = '/creditCards/{token}';
 
         //process optional query parameters
         $_queryBuilder = APIHelper::appendUrlWithTemplateParameters($_queryBuilder, array (
@@ -310,11 +301,11 @@ class FundController extends BaseController
             ));
 
         //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+        $_queryUrl = APIHelper::cleanUrl(Configuration::getBaseUri() . $_queryBuilder);
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'V2NGSDK',
+            'user-agent'    => BaseController::USER_AGENT,
             'Accept'        => 'application/json'
         );
 
@@ -363,21 +354,21 @@ class FundController extends BaseController
         }
 
 
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
         //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/creditCards';
+        $_queryBuilder = '/creditCards';
 
         //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+        $_queryUrl = APIHelper::cleanUrl(Configuration::getBaseUri() . $_queryBuilder);
 
         //prepare headers
         $_headers = array (
-            'user-agent'    => 'V2NGSDK',
+            'user-agent'    => BaseController::USER_AGENT,
             'Accept'        => 'application/json',
             'content-type'  => 'application/json; charset=utf-8'
         );
+
+        //json encode body
+        $_bodyJson = Request\Body::Json($body);
 
         //set HTTP basic auth parameters
         Request::auth(Configuration::$platformName, Configuration::$platformKey);
@@ -389,7 +380,7 @@ class FundController extends BaseController
         }
 
         //and invoke the API call request to fetch the response
-        $response = Request::post($_queryUrl, $_headers, Request\Body::Json($body));
+        $response = Request::post($_queryUrl, $_headers, $_bodyJson);
 
         $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
         $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
