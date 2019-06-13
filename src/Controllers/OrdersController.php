@@ -134,7 +134,8 @@ class OrdersController extends BaseController
         //prepare headers
         $_headers = array (
             'user-agent'     => BaseController::USER_AGENT,
-            'Accept'         => 'application/json'
+            'Accept'         => 'application/json',
+            'content-type'      => 'application/json; charset=utf-8'
         );
 
         //set HTTP basic auth parameters
